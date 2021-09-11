@@ -1,3 +1,105 @@
 body {
   background-color: #4f86ff;
+  font-display: Poppins, "sans-serif";
+}
+.max-w-498 {
+  max-width: 45rem;
+  border-radius: 9px;
+}
+.signup,
+.signin {
+  font-size: 35px;
+  font-weight: 500;
+}
+.signup-active,
+.signin-active {
+  color: #3574ff;
+  border-bottom: 4px solid #3574ff;
+}
+.react-tel-input {
+  width: 65%;
+  margin: auto;
+}
+.form-control {
+  padding-top: 10.5px !important;
+  padding-bottom: 10.5px !important;
+  width: 100% !important;
+  border: 2px solid #636363 !important;
+  font-weight: 600 !important;
+}
+.email,
+.password,
+.sign-email,
+.sign-password {
+  border-radius: 5px;
+  position: relative;
+  display: block;
+  padding-left: 3.438rem;
+}
+.sign-password,
+.sign-email {
+  padding-left: 1rem;
+}
+.sign-password{
+  padding-right: 3.438rem;
+}
+.form-control:focus {
+  outline: none;
+  box-shadow: none !important;
+  border: 2px solid #4f86ff !important;
+  color: #3574ff !important;
+}
+.react-tel-input .selected-flag.open:before {
+  border: none;
+  box-shadow: none;
+}
+.mail-input,
+.password-input {
+  position: relative;
+  margin: auto;
+}
+.mail-svg,
+.lock-svg {
+  position: absolute;
+  top: 15%;
+  left: 2%;
+  z-index: 2;
+  width: 2.1rem;
+}
+.eye-svg {
+  position: absolute;
+  top: 15%;
+  right: 2%;
+  cursor: pointer;
+  z-index: 1;
+  width: 2.1rem;
+}
+.signup-btn {
+  border-radius: 5px;
+}
+@media (min-width: 360px) {
+  .tabs {
+    padding: 1rem;
+  }
+  .signup,
+  .signin {
+    font-size: 25px;
+  }
+  .react-tel-input,
+  .mail-input,
+  .password-input,
+  .signup-btn {
+    width: 100% !important;
+  }
+}
+@media (min-width: 768px) {
+  .tabs {
+    padding: 2rem 5rem 3rem 5rem;
+  }
+  .react-tel-input,
+  .mail-input,
+  .password-input,
+  .signup-btn {
+    width: 65% !important;
+  }
 }

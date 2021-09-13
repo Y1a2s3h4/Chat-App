@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/bootstrap.css'
-import MailIcon from '../Assets/MailIcon'
-import LockIcon from '../Assets/LockIcon'
+import MailIcon from '../../Assets/MailIcon'
+import LockIcon from '../../Assets/LockIcon'
 export default function Signup() {
     const [mailInput, setMailInput] = useState({ value: "", isFocused: false })
     const [passwordInput, setPasswordInput] = useState({ value: "", isFocused: false })

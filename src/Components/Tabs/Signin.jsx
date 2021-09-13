@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
-import EyeIcon from '../Assets/EyeIcon'
-import EyeOffIcon from '../Assets/EyeOffIcon'
+import EyeIcon from '../../Assets/EyeIcon'
+import EyeOffIcon from '../../Assets/EyeOffIcon'
+import { Link } from 'react-router-dom'
 export default function Signin() {
     const [mailInput, setMailInput] = useState("")
     const [passwordInput, setPasswordInput] = useState({ value: "", isFocused: false })
@@ -34,7 +35,7 @@ export default function Signin() {
         }
     }
     return (
-        <div className="mt-4">
+        <div className="mt-8">
             <div className="mail-input">
                 <input onChange={mailHandle} value={mailInput} type="mail" placeholder="Enter Username or Number" required className="mb-7 sign-email form-control font-display" />
             </div>
@@ -44,9 +45,9 @@ export default function Signin() {
                 <input ref={focusedEle} value={passwordInput.value} onChange={passwordHandle} onFocus={passwordFocus} onBlur={passwordBlur} type="password" placeholder="Minimum Length 8" minLength="8" required className="my-7 sign-password form-control font-display" />
             </div>
             <div className="button">
-                <button className="block mx-auto bg-blue-500 text-white font-display px-5 py-3 signup-btn">
+                <Link to="/dashboard" className="block mx-auto text-center bg-blue-500 text-white font-display px-5 py-3 signup-btn">
                     Sign In
-                </button>
+                </Link>
             </div>
         </div>
     )

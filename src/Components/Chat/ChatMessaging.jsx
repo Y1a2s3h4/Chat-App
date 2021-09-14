@@ -9,7 +9,7 @@ export default function ChatMessaging({ profile }) {
                     <h1 className="text-white">{profile.user_name}</h1>
                 </div>)
             }
-            {!!profile._id && (
+            {profile._id && (
                 <MessageIcon className="w-10" color="bg-custom-blue" />
             )}
             {profile._id &&

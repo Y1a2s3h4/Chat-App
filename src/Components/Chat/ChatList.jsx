@@ -8,7 +8,10 @@ export default function ChatList({ setProfile }) {
             {/* <div className="list absolute"> */}
             {ProfileData.map((ele, idx) => {
                 return (
-                    <button onClick={() => setProfile(ele)} key={ele._id} className="item w-full bg-blue-300 flex items-center py-4 px-4 rounded-10 my-4">
+                    <button onClick={() => {
+                        setProfile(ele)
+                    }}
+                        key={ele._id} className="item w-full bg-blue-300 flex items-center py-4 px-4 rounded-10 my-4">
                         <img src={ele.user_avatar} className="w-9 rounded-full mr-3" alt="" />
                         <h1 className="font-semibold">{ele.user_name}</h1>
                     </button>

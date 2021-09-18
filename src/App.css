@@ -94,6 +94,24 @@ body {
 .chat-messaging {
   width: calc(75vw - 348px);
 }
+.sended-msg,
+.received-msg {
+  width: fit-content;
+  padding: 1rem 2rem;
+  margin-top: 0.5rem;
+}
+.sended-msg {
+  border-radius: 15px 15px 0px 15px;
+  background-color: #4f86ff;
+  color: #fff;
+  margin-right: 0.7rem;
+}
+.received-msg {
+  border-radius: 15px 15px 15px 0px;
+  background-color: #858585;
+  color: #fff;
+  margin-left: 0.7rem;
+}
 @media (min-width: 360px) {
   .tabs {
     padding: 1rem;
@@ -120,7 +138,7 @@ body {
     width: 65% !important;
   }
 }
-@media (min-width:1400px) {
+@media (min-width: 1400px) {
   .chat-wrapper {
     width: 75vw;
     height: 85vh;

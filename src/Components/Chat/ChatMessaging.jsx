@@ -17,7 +17,7 @@ export default function ChatMessaging({ profile }) {
             }
             {profile._id && (
                 <>
-                    {profile && profile.messages.map((msg) => (
+                    {profile && profile.messages && profile.messages.map((msg) => (
                         <>
                             <div>
                                 {msg.sendedMsg === "" ? "" : (<p className="sended-msg ml-auto">{msg.sendedMsg}</p>)}

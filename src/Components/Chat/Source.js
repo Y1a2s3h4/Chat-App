@@ -18,6 +18,16 @@ const data = [
     _id: "U9316",
     user_name: "Sridhar Srinivasan",
     user_avatar: "https://i.pravatar.cc/300",
+    messages: [
+      {
+        sendedMsg: "Hey, Sridhar",
+        receivedMsg: "Hey 👋",
+      },
+      {
+        sendedMsg: "Nothing 😁",
+        receivedMsg: "🤦‍♂️😂",
+      },
+    ],
   },
   {
     _id: "U8531",

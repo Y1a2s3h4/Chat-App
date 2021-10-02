@@ -2,6 +2,9 @@ import React, { useRef, useState } from 'react'
 import EyeIcon from '../../Assets/EyeIcon'
 import EyeOffIcon from '../../Assets/EyeOffIcon'
 import { Link } from 'react-router-dom'
+import firebase from "../../Firebase/firebase"
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
 export default function Signin() {
     const [mailInput, setMailInput] = useState("")
     const [passwordInput, setPasswordInput] = useState({ value: "", isFocused: false })
@@ -34,6 +37,22 @@ export default function Signin() {
             focusedEle.current.type = "password"
         }
     }
+
+    function firebaseSignin(email, password) {
+        const auth = getAuth();
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.error(errorCode, errorMessage)
+            });
+    }
+
     return (
         <div className="mt-8">
             <div className="mail-input">
@@ -44,7 +63,9 @@ export default function Signin() {
                 {!toggle && <span onClick={toggleShowPassword}><EyeIcon className="eye-svg" strokeWidth="1" strokeColor={passwordInput.isFocused ? "#4f86ff" : "currentColor"} /></span>}
                 <input ref={focusedEle} value={passwordInput.value} onChange={passwordHandle} onFocus={passwordFocus} onBlur={passwordBlur} type="password" placeholder="Minimum Length 8" minLength="8" required className="my-7 sign-password form-control font-display" />
             </div>
-            <div className="button">
+            <div className="button" onClick={() => {
+                firebaseSignin(mailInput.value, passwordInput.value)
+            }}>
                 <Link to="/dashboard" className="block mx-auto text-center bg-blue-500 text-white font-display px-5 py-3 signup-btn">
                     Sign In
                 </Link>

@@ -3,6 +3,8 @@ import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/bootstrap.css'
 import MailIcon from '../../Assets/MailIcon'
 import LockIcon from '../../Assets/LockIcon'
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+
 export default function Signup() {
     const [mailInput, setMailInput] = useState({ value: "", isFocused: false })
     const [passwordInput, setPasswordInput] = useState({ value: "", isFocused: false })
@@ -37,29 +39,45 @@ export default function Signup() {
             return { ...prevState, value: e.target.value }
         })
     }
+
+    const firebaseAuth = (email, password) => {
+        const auth = getAuth();
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                console.log(user)
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.error({ errorCode, errorMessage })
+            });
+    }
     return (
         <div className="mt-4">
-            <PhoneInput
-                country="in"
-                inputClass="font-display my-7"
-                inputProps={{
-                    name: 'phone',
-                    required: true,
-                }}
-            />
-            <div className="mail-input">
-                <MailIcon className="mail-svg" strokeWidth="1" strokeColor={mailInput.isFocused ? "#4f86ff" : "currentColor"} />
-                <input ref={focusedEle} onChange={mailHandle} onFocus={mailFocus} onBlur={mailBlur} type="mail" placeholder="jhondoe@mail.com" required className="mb-7 email form-control font-display" />
-            </div>
-            <div className="password-input">
-                <LockIcon className="lock-svg" strokeWidth="1" strokeColor={passwordInput.isFocused ? "#4f86ff" : "currentColor"} />
-                <input ref={focusedEle} onChange={passwordHandle} onFocus={passwordFocus} onBlur={passwordBlur} type="password" placeholder="Minimum Length 8" minLength="8" required className="my-7 password form-control font-display" />
-            </div>
-            <div className="button">
-                <button className="block mx-auto bg-blue-500 text-white font-display px-5 py-3 signup-btn">
-                    Sign Up
-                </button>
-            </div>
+            <form onSubmit={() => { firebaseAuth(mailInput.value, passwordInput.value) }}>
+                <PhoneInput
+                    country="in"
+                    inputClass="font-display my-7"
+                    inputProps={{
+                        name: 'phone',
+                        required: true,
+                    }}
+                />
+                <div className="mail-input">
+                    <MailIcon className="mail-svg" strokeWidth="1" strokeColor={mailInput.isFocused ? "#4f86ff" : "currentColor"} />
+                    <input ref={focusedEle} onChange={mailHandle} onFocus={mailFocus} onBlur={mailBlur} type="mail" placeholder="jhondoe@mail.com" required={true} className="mb-7 email form-control font-display" />
+                </div>
+                <div className="password-input">
+                    <LockIcon className="lock-svg" strokeWidth="1" strokeColor={passwordInput.isFocused ? "#4f86ff" : "currentColor"} />
+                    <input ref={focusedEle} onChange={passwordHandle} onFocus={passwordFocus} onBlur={passwordBlur} type="password" placeholder="Minimum Length 8" minLength="8" required={true} className="my-7 password form-control font-display" />
+                </div>
+                <div className="button">
+                    <button type="submit" onClick={() => { firebaseAuth(mailInput.value, passwordInput.value) }} className="block mx-auto bg-blue-500 text-white font-display px-5 py-3 signup-btn">
+                        Sign Up
+                    </button>
+                </div>
+            </form>
         </div>
     )
 }

@@ -20,7 +20,7 @@ export default function Routes() {
   return (
     <Router>
       <Switch>
-        {/* <PrivateRoute
+        <PrivateRoute
           path="/dashboard"
           isAuthenticated={isAuthenticated}
           component={Dashboard}
@@ -29,9 +29,9 @@ export default function Routes() {
           path="/"
           isAuthenticated={isAuthenticated}
           component={LandingPage}
-        /> */}
-        <Route component={LandingPage} path="/" />
-        <Route component={Dashboard} path="/dashboard" />
+        />
+        {/* <Route component={LandingPage} path="/" />
+        <Route component={Dashboard} path="/dashboard" /> */}
       </Switch>
     </Router>
   );

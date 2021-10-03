@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import MessageIcon from '../../Assets/MessageIcon'
+import { v4 } from 'uuid'
 export default function ChatMessaging({ profile }) {
     return (
         <div className="chat-messaging absolute top-0 right-0 rounded-10 bg-white h-full">
@@ -18,14 +19,14 @@ export default function ChatMessaging({ profile }) {
             {profile._id && (
                 <>
                     {profile && profile.messages && profile.messages.map((msg) => (
-                        <>
+                        <Fragment key={v4()}>
                             <div>
                                 {msg.sendedMsg === "" ? "" : (<p className="sended-msg ml-auto">{msg.sendedMsg}</p>)}
                             </div>
                             <div>
                                 {msg.receivedMsg === "" ? "" : (<p className="received-msg mr-auto">{msg.receivedMsg}</p>)}
                             </div>
-                        </>
+                        </Fragment>
                     ))}
                 </>
             )

@@ -55,7 +55,7 @@ export default function Signin({ showAlert, setShowAlert }) {
 
     return (
         <div className="mt-8">
-            <form onSubmit={(e) => { firebaseSignin(e, mailInput.value, passwordInput.value) }}>
+            <form onSubmit={(e) => { firebaseSignin(e, mailInput, passwordInput.value) }}>
                 <div className="mail-input">
                     <input onChange={mailHandle} value={mailInput} type="mail" placeholder="Enter Username or Number" required className="mb-7 sign-email form-control font-display" />
                 </div>

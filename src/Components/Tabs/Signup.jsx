@@ -4,8 +4,7 @@ import 'react-phone-input-2/lib/bootstrap.css'
 import MailIcon from '../../Assets/MailIcon'
 import LockIcon from '../../Assets/LockIcon'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-
-export default function Signup() {
+export default function Signup({ showAlert, setShowAlert }) {
     const [mailInput, setMailInput] = useState({ value: "", isFocused: false })
     const [passwordInput, setPasswordInput] = useState({ value: "", isFocused: false })
     const focusedEle = useRef()
@@ -40,22 +39,25 @@ export default function Signup() {
         })
     }
 
-    const firebaseAuth = (email, password) => {
+    const firebaseAuth = (e, email, password) => {
+        e.preventDefault()
         const auth = getAuth();
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
                 console.log(user)
+                setShowAlert({ showSuccess: true, showErr: false })
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 console.error({ errorCode, errorMessage })
+                setShowAlert({ showErr: true, showSuccess: false })
             });
     }
     return (
         <div className="mt-4">
-            <form onSubmit={() => { firebaseAuth(mailInput.value, passwordInput.value) }}>
+            <form onSubmit={(e) => { firebaseAuth(e, mailInput.value, passwordInput.value) }}>
                 <PhoneInput
                     country="in"
                     inputClass="font-display my-7"
@@ -73,7 +75,7 @@ export default function Signup() {
                     <input ref={focusedEle} onChange={passwordHandle} onFocus={passwordFocus} onBlur={passwordBlur} type="password" placeholder="Minimum Length 8" minLength="8" required={true} className="my-7 password form-control font-display" />
                 </div>
                 <div className="button">
-                    <button type="submit" onClick={() => { firebaseAuth(mailInput.value, passwordInput.value) }} className="block mx-auto bg-blue-500 text-white font-display px-5 py-3 signup-btn">
+                    <button type="submit" className="block mx-auto bg-blue-500 text-white font-display px-5 py-3 signup-btn">
                         Sign Up
                     </button>
                 </div>

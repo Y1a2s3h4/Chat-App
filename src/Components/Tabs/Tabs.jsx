@@ -1,21 +1,18 @@
 import React, { useState } from 'react'
 import Signup from './Signup'
 import Signin from './Signin'
-export default function Tabs() {
-    const [signUp, setSignUp] = useState(true)
-    const [signIn, setSignIn] = useState(false)
-    const signUpClass = signUp ? 'signup font-display signup-active' : 'signup font-display'
-    const signInClass = signIn ? 'signin font-display signin-active' : 'signin font-display'
+export default function Tabs({ showAlert, setShowAlert }) {
+    const [tabs, setTabs] = useState({ signup: true, signin: false })
+    const signUpClass = tabs.signup ? 'signup font-display signup-active' : 'signup font-display'
+    const signInClass = tabs.signin ? 'signin font-display signin-active' : 'signin font-display'
     function signUpHandle() {
-        if (signIn) {
-            setSignIn(false)
-            setSignUp(true)
+        if (tabs.signin) {
+            setTabs({ signup: true, signin: false })
         }
     }
     function signInHandle() {
-        if (signUp) {
-            setSignUp(false)
-            setSignIn(true)
+        if (tabs.signup) {
+            setTabs({ signup: false, signin: true })
         }
     }
     return (
@@ -24,8 +21,8 @@ export default function Tabs() {
                 <div onClick={signUpHandle} className={signUpClass}>Sign Up</div>
                 <div onClick={signInHandle} className={signInClass}>Sign In</div>
             </div>
-            {signUp && <Signup />}
-            {signIn && <Signin />}
+            {tabs.signup && <Signup showAlert={showAlert} setShowAlert={setShowAlert} />}
+            {tabs.signin && <Signin showAlert={showAlert} setShowAlert={setShowAlert} />}
         </div>
     )
 }

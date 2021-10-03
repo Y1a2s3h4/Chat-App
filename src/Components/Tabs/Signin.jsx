@@ -40,7 +40,7 @@ export default function Signin({ showAlert, setShowAlert }) {
     function firebaseSignin(e, email, password) {
         e.preventDefault()
         const auth = getAuth();
-        signInWithEmailAndPassword(auth, email, password)``
+        signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
                 setShowAlert({ showSuccess: true, showErr: false })
@@ -48,7 +48,7 @@ export default function Signin({ showAlert, setShowAlert }) {
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                console.error(errorCode, errorMessage)
+                console.log({ errorCode, errorMessage })
                 setShowAlert({ showErr: true, showSuccess: false })
             });
     }

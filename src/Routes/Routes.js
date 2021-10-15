@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
 import Dashboard from "../Components/Dashboard";
 import LandingPage from "../Components/LandingPage";
 import PrivateRoute from "./PrivateRoute";
@@ -16,6 +16,7 @@ export default function Routes() {
         setIsAuthenticated(false);
       }
     });
+    // eslint-disable-next-line
   }, []);
   return (
     <Router>

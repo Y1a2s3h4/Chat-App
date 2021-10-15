@@ -64,16 +64,20 @@ body {
   position: absolute;
   top: 15%;
   left: 2%;
-  z-index: 2;
+  z-index: 1;
   width: 2.1rem;
 }
-.eye-svg {
+.eye-svg,
+.send-svg {
   position: absolute;
   top: 15%;
   right: 2%;
   cursor: pointer;
   z-index: 1;
   width: 2.1rem;
+}
+.send-svg {
+  transform: rotate(90deg);
 }
 .signup-btn {
   border-radius: 5px;
@@ -86,6 +90,9 @@ body {
   left: 0;
   background-color: #fff;
 }
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
 .chat-wrapper {
   width: 100vw;
   height: 100vh;
@@ -93,6 +100,9 @@ body {
 }
 .chat-messaging {
   width: calc(75vw - 348px);
+}
+.chat-messaging-body {
+  height: 73vh;
 }
 .sended-msg,
 .received-msg {

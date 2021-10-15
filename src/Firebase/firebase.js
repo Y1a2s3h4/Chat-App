@@ -1,15 +1,17 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-// import { getAnalytics } from "firebase/analytics";
 const firebaseConfig = {
-  apiKey: "AIzaSyAYBzmcunHEzRCb8XhFSffix-5x1mnahek",
-  authDomain: "chat-app-be2a9.firebaseapp.com",
-  projectId: "chat-app-be2a9",
-  storageBucket: "chat-app-be2a9.appspot.com",
-  messagingSenderId: "1031739628746",
-  appId: "1:1031739628746:web:50ad051ad21996168fe833",
-  measurementId: "G-7LFZESH08L",
+  apiKey: "AIzaSyBwINIqPAfrvOKN85hTNn3Sqju3xgfO684",
+  authDomain: "chatapp-654fc.firebaseapp.com",
+  projectId: "chatapp-654fc",
+  storageBucket: "chatapp-654fc.appspot.com",
+  messagingSenderId: "651009963674",
+  appId: "1:651009963674:web:7fed25243e265cfffa1123",
+  measurementId: "G-Q4J9WHSKJ8"
 };
-const app = initializeApp(firebaseConfig);
+
+// Initialize Firebase
+initializeApp(firebaseConfig);
+// const analytics = getAnalytics(app);
 export { getAuth, onAuthStateChanged };
 // const analytics = getAnalytics(app);

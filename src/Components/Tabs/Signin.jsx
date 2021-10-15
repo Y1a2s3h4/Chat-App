@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import EyeIcon from '../../Assets/EyeIcon'
 import EyeOffIcon from '../../Assets/EyeOffIcon'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 export default function Signin({ showAlert, setShowAlert }) {
@@ -43,6 +43,8 @@ export default function Signin({ showAlert, setShowAlert }) {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
+                console.log(user)
+                localStorage.setItem("user", JSON.stringify({ token: user.accessToken, userMail: user.email, userId: user.uid }))
                 setShowAlert({ showSuccess: true, showErr: false })
             })
             .catch((error) => {

@@ -67,8 +67,7 @@ body {
   z-index: 1;
   width: 2.1rem;
 }
-.eye-svg,
-.send-svg {
+.eye-svg {
   position: absolute;
   top: 15%;
   right: 2%;
@@ -102,7 +101,17 @@ body {
   width: calc(75vw - 348px);
 }
 .chat-messaging-body {
-  height: 73vh;
+  height: 43.5rem;
+}
+.chat-messaging-body::-webkit-scrollbar {
+  width: 5px;
+}
+.chat-messaging-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+.chat-messaging-body::-webkit-scrollbar-thumb {
+  background: #3574ff;
+  border-radius: 1px;
 }
 .sended-msg,
 .received-msg {

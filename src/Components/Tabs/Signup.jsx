@@ -46,7 +46,6 @@ export default function Signup({ showAlert, setShowAlert }) {
             .then((userCredential) => {
                 const user = userCredential.user;
                 localStorage.setItem("user", JSON.stringify({ token: user.accessToken, userMail: user.email, userId: user.uid }))
-                console.log(user)
                 setShowAlert({ showSuccess: true, showErr: false })
             })
             .catch((error) => {

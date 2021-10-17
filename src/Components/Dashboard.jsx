@@ -6,7 +6,7 @@ export default function Dashboard() {
     return (
         <>
             <div className="dashboard-wrapper flex justify-center items-center">
-                <div className="chat-wrapper bg-white rounded-10 shadow-xl relative">
+                <div className="chat-wrapper flex flex-row bg-white rounded-10 shadow-xl relative">
                     <ChatList setProfile={setProfile} />
                     <ChatMessaging profile={profile} />
                 </div>

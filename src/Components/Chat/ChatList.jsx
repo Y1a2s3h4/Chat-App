@@ -1,22 +1,22 @@
 import React from 'react'
 import { v4 } from "uuid"
-import GlobalImg from "../../Assets/Global.png"
 export default function ChatList({ setProfile }) {
-    const userMail = JSON.parse(localStorage.getItem("user")).userMail
+    const user = JSON.parse(localStorage.getItem("user"))
+    const user_img = `https://ui-avatars.com/api/?name=${user?.userMail}`
     return (
-        <div className="chat-list absolute top-0 left-0 bg-custom-blue w-96 h-full overflow-auto">
+        <div className="chat-list bg-custom-blue w-96 h-full overflow-auto">
             <div className="dropdown">
                 {/* <UserIcon className="w-12 cursor-pointer" color="white" /> */}
-                <img src={`https://ui-avatars.com/api/?name=${userMail}`} className="w-12 rounded-full cursor-pointer" alt="" />
+                <img src={`https://ui-avatars.com/api/?name=${user?.userMail}`} className="w-12 rounded-full cursor-pointer" alt="" />
                 <ul className="dropdown-menu absolute hidden text-gray-700 pt-1">
-                    <li className=""><a className="rounded bg-gray-100 hover:bg-gray-200 py-2 px-4 block whitespace-no-wrap" href="#yash">{userMail}</a></li>
+                    <li className=""><a className="rounded bg-gray-100 hover:bg-gray-200 py-2 px-4 block whitespace-no-wrap" href="#yash">{user?.userMail}</a></li>
                 </ul>
             </div>
             <button onClick={() => {
                 setProfile({
                     _id: "G000",
                     user_name: "Global Chat",
-                    user_avatar: `${GlobalImg}`,
+                    user_avatar: { user_img },
                     messages: [
                     ],
                 })

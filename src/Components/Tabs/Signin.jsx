@@ -43,7 +43,6 @@ export default function Signin({ showAlert, setShowAlert }) {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
-                console.log(user)
                 localStorage.setItem("user", JSON.stringify({ token: user.accessToken, userMail: user.email, userId: user.uid }))
                 setShowAlert({ showSuccess: true, showErr: false })
             })

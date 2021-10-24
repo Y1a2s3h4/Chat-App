@@ -4,42 +4,37 @@ import { v4 } from 'uuid'
 import SendIcon from '../../Assets/SendIcon'
 import { getDatabase, ref, push, onValue } from "firebase/database";
 import GlobalIcon from '../../Assets/Global.jsx'
+import ScrollableFeed from 'react-scrollable-feed'
 export default function ChatMessaging({ profile }) {
     const [msg, setMsg] = useState("")
     const [messages, setMessages] = useState([])
     const db = getDatabase();
     const scroll = useRef()
-    console.log(scroll)
+    const { user_name } = profile
+    onValue(ref(db, `/`), (res) => {
+        if (res.val()) {
+            console.log(res.val())
+        }
+    })
     useEffect(() => {
-        onValue(ref(db, "/users"), (res) => {
+        onValue(ref(db, `/${user_name}`), (res) => {
             if (res.val()) {
                 setMessages(Object.values(res.val()))
-                scroll?.current?.scrollIntoView({ behavior: "smooth" })
             }
         })
         // eslint-disable-next-line
     }, [])
     async function writeUserData(e, userId, email, profile) {
         e.preventDefault()
-        push(ref(db, '/users'), {
-            email,
-            userId,
-            msg,
-            profile
-        });
+        if (!!msg.trim()) {
+            push(ref(db, `/${user_name}`), {
+                email,
+                userId,
+                msg: msg.trim(),
+                profile
+            });
+        }
         setMsg("")
-        /* const res = await fetch("https://chat-app-be2a9-default-rtdb.asia-southeast1.firebasedatabase.app/users.json", {
-            method: "POST",
-            headers:{
-            "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                email, 
-                userId, 
-                msg 
-            })
-        }) */
-        // console.log(res)
     }
     const user = JSON.parse(localStorage.getItem("user"))
     return (
@@ -62,7 +57,7 @@ export default function ChatMessaging({ profile }) {
                 {profile._id && (
                     <>
                         <div className="chat-messaging-body flex flex-col relative flex-none overflow-y-auto">
-                            {messages?.map((msg) => (
+                            <ScrollableFeed>{messages?.map((msg) => (
                                 <Fragment key={v4()}>
                                     <div className="flex flex-row w-full my-2">
                                         {msg.email === user?.userMail ? (<p className="sended-msg shadow-md ml-auto">{msg.msg}</p>) : (
@@ -73,7 +68,7 @@ export default function ChatMessaging({ profile }) {
                                         )}
                                     </div>
                                 </Fragment>
-                            ))}
+                            ))}</ScrollableFeed>
                             <div className="dummy" ref={scroll}></div>
                         </div>
                     </>

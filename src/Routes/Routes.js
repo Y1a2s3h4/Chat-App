@@ -5,6 +5,7 @@ import LandingPage from "../Components/LandingPage";
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 import { getAuth, onAuthStateChanged } from "../Firebase/firebase";
+import NewChat from "../Components/Chat/NewChat";
 export default function Routes() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const auth = getAuth();
@@ -25,6 +26,11 @@ export default function Routes() {
           path="/dashboard"
           isAuthenticated={isAuthenticated}
           component={Dashboard}
+        />
+        <PrivateRoute
+          path="/newchat"
+          isAuthenticated={isAuthenticated}
+          component={NewChat}
         />
         <PublicRoute
           path="/"

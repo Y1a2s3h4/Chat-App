@@ -81,7 +81,7 @@ body {
 .signup-btn {
   border-radius: 5px;
 }
-.dashboard-wrapper {
+.dashboard-wrapper, .new-chat-wrapper {
   width: 100vw;
   height: 100vh;
   position: absolute;

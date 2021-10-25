@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect, useRef } from 'react'
 import MessageIcon from '../../Assets/MessageIcon'
 import { v4 } from 'uuid'
 import SendIcon from '../../Assets/SendIcon'
-import { getDatabase, ref, push, onValue } from "firebase/database";
+import { getDatabase, ref, push, onValue, update } from "firebase/database";
 import GlobalIcon from '../../Assets/Global.jsx'
 import ScrollableFeed from 'react-scrollable-feed'
 export default function ChatMessaging({ profile }) {
@@ -10,42 +10,40 @@ export default function ChatMessaging({ profile }) {
     const [messages, setMessages] = useState([])
     const db = getDatabase();
     const scroll = useRef()
-    const { user_name } = profile
-    onValue(ref(db, `/`), (res) => {
-        if (res.val()) {
-            console.log(res.val())
-        }
-    })
+    const { user_name, chatType, _id } = profile
+    const switchCollection = user_name === "Global" ? user_name : `${chatType}/${_id}`
+    const user = JSON.parse(localStorage.getItem("user"))
+
+    const user_img = `https://ui-avatars.com/api/?name=${user?.userMail}`
     useEffect(() => {
-        onValue(ref(db, `/${user_name}`), (res) => {
+        onValue(ref(db, `/${switchCollection}`), (res) => {
             if (res.val()) {
-                setMessages(Object.values(res.val()))
+                console.log(res.val())
+                const arrData = Object.values(res.val())
+                arrData.pop()
+                setMessages(arrData)
             }
         })
         // eslint-disable-next-line
-    }, [])
+    }, [profile])
     async function writeUserData(e, userId, email, profile) {
         e.preventDefault()
+        const obj = () => user_name === "Global" ? { email, userId, msg: msg.trim(), profile } : { msg: msg.trim(), profile: user_img, email: user?.userMail }
         if (!!msg.trim()) {
-            push(ref(db, `/${user_name}`), {
-                email,
-                userId,
-                msg: msg.trim(),
-                profile
-            });
+            push(ref(db, `/${switchCollection}`), obj());
         }
         setMsg("")
     }
-    const user = JSON.parse(localStorage.getItem("user"))
     return (
         <div className="chat-messaging rounded-10 flex flex-col bg-white h-full">
             <form className="flex flex-col" onSubmit={(e) => {
-                writeUserData(e, user?.userId, user?.userMail, profile.user_avatar.user_img)
+                writeUserData(e, user?.userId, user?.userMail, profile.user_avatar)
             }}>
                 {profile._id &&
                     (<div className="profile-bar w-full bg-blue-600 flex items-center py-2 px-5">
-                        <GlobalIcon className="w-12 rounded-full" strokeColor="#fff" />
-                        <h1 className="text-white ml-4">{profile.user_name}</h1>
+                        {user_name === "Global" && <GlobalIcon className="w-12 rounded-full" strokeColor="#fff" />}
+                        {!(user_name === "Global") && <img src={profile.user_avatar} className="w-11 rounded-full" alt="" />}
+                        <h1 className="text-white ml-4">{user_name}</h1>
                     </div>)
                 }
                 {!profile._id && (<>

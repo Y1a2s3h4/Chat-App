@@ -24,13 +24,20 @@ export default function ChatList({ setProfile }) {
                 const arr = Object.values(res.val())
                 arr.shift()
                 const arr2 = arr.map((e) => Object.keys(e)).flat()
-                const mails = arr.map((e, idx) => e[Object.keys(e)[0]]).filter((e) => e.email.includes(user?.userMail))
-                setUsers(mails.map((e, idx) => {
-                    let objCopy = { ...e }
+                const mails = arr.map((e, idx) => {
+                    let userObj = e[Object.keys(e)]
+                    console.log(userObj)
+                    let objCopy = { ...userObj }
                     objCopy._id = arr2[idx]
                     objCopy.chatType = chatType[idx]
+                    console.log(chatType[idx], arr2[idx])
                     return objCopy
-                }))
+                }).filter((e) => {
+                    console.log()
+                    return e.email.includes(user?.userMail)
+                })
+                console.log(mails)
+                setUsers(mails)
             }
         })
     }, [])

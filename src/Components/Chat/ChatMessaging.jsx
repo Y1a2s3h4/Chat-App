@@ -12,15 +12,17 @@ export default function ChatMessaging({ profile }) {
     const scroll = useRef()
     const { user_name, chatType, _id } = profile
     const switchCollection = user_name === "Global" ? user_name : `${chatType}/${_id}`
+    console.log(chatType, _id)
     const user = JSON.parse(localStorage.getItem("user"))
 
     const user_img = `https://ui-avatars.com/api/?name=${user?.userMail}`
     useEffect(() => {
         onValue(ref(db, `/${switchCollection}`), (res) => {
             if (res.val()) {
+                console.log(chatType, _id, switchCollection)
                 console.log(res.val())
                 const arrData = Object.values(res.val())
-                arrData.pop()
+                switchCollection!=="Global" && arrData.pop()
                 setMessages(arrData)
             }
         })
